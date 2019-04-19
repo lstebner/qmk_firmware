@@ -17,19 +17,14 @@
 #include QMK_KEYBOARD_H
 
 enum custom_keycodes {
-  CHANGE_WINDOW = SAFE_RANGE,
-  COPY,
-  CTRLP,
+  COPY = SAFE_RANGE,
   GUP, 
   NEW_TAB,
   NEW_WINDOW,
-  NEXT_APP,
   NEXT_TAB,
   PASTE,
-  PREV_APP,
   PREV_TAB,
   VIM_DELETE_LINE,
-  VIM_NERDTREE_TOGGLE,
   VIM_NEXT_TAB,
   VIM_PANE_DOWN,
   VIM_PANE_LEFT,
@@ -54,9 +49,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT_60_ansi(
     KC_GESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL, KC_BSPC,
     KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC, KC_BSLS,
-    MO(1), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT, KC_ENT,
-    KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-    KC_LCTL, KC_LALT, KC_LGUI, KC_SPC, KC_RALT, KC_CAPS, MO(1), KC_ENT
+    MO(LAYER_BASE_ALT), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT, KC_ENT,
+    KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, OSL(LAYER_MACRO),
+    KC_LCTL, KC_LALT, KC_LGUI, KC_SPC, KC_RALT, KC_CAPS, MO(LAYER_BASE_ALT), KC_ENT
   ),
 
   [LAYER_BASE_ALT] = LAYOUT_60_ansi(
@@ -77,151 +72,86 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (!record->event.pressed) {
+    return true;
+  }
+
   switch (keycode) {
     case NEXT_TAB:
-      if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LSHIFT) SS_TAP(X_RBRACKET) SS_UP(X_LGUI) SS_UP(X_LSHIFT));
-      }
+      SEND_STRING(SS_DOWN(X_LGUI X_LSHIFT) SS_TAP(X_RBRACKET) SS_UP(X_LGUI X_LSHIFT));
       break;
 
     case PREV_TAB:
-      if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LSHIFT) SS_TAP(X_LBRACKET) SS_UP(X_LGUI) SS_UP(X_LSHIFT));
-      }
+      SEND_STRING(SS_DOWN(X_LGUI X_LSHIFT) SS_TAP(X_LBRACKET) SS_UP(X_LGUI X_LSHIFT));
       break;
 
     case NEW_TAB:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LGUI("t"));
-      }
+      SEND_STRING(SS_LGUI("t"));
       break;
 
     case NEW_WINDOW:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LGUI("n"));
-      }
-      break;
-
-    case VIM_NERDTREE_TOGGLE:
-      if (record->event.pressed) {
-        SEND_STRING(":NERDTreeToggle" SS_TAP(X_ENTER));
-      }
-      break;
-
-    case CTRLP:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTRL("p"));
-      }
+      SEND_STRING(SS_LGUI("n"));
       break;
 
     case VIM_WRITE:
-      if (record->event.pressed) {
-        SEND_STRING(":w" SS_TAP(X_ENTER));
-      }
+      SEND_STRING(":w" SS_TAP(X_ENTER));
       break;
 
     case VIM_QUIT:
-      if(record->event.pressed) {
-        SEND_STRING(":q" SS_TAP(X_ENTER));
-      }
+      SEND_STRING(":q" SS_TAP(X_ENTER));
       break;
 
     case VIM_QUITALL:
-      if (record->event.pressed) {
-        SEND_STRING(":qall" SS_TAP(X_ENTER));
-      }
+      SEND_STRING(":qall" SS_TAP(X_ENTER));
       break;
 
     case VIM_NEXT_TAB:
-      if (record->event.pressed) {
-        SEND_STRING("gt");
-      }
+      SEND_STRING("gt");
       break;
-
+      
     case VIM_PREV_TAB:
-      if (record->event.pressed) {
-        SEND_STRING("gT");
-      }
+      SEND_STRING("gT");
       break;
 
     case VIM_PANE_LEFT:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTRL("w") SS_TAP(X_LEFT));
-      }
-      break;
-
-    case VIM_PANE_RIGHT:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTRL("w") SS_TAP(X_RIGHT));
-      }
+      SEND_STRING(SS_LCTRL("w") SS_TAP(X_LEFT));
       break;
       
+    case VIM_PANE_RIGHT:
+      SEND_STRING(SS_LCTRL("w") SS_TAP(X_RIGHT));
+      break;
+
     case VIM_PANE_UP:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTRL("w") SS_TAP(X_UP));
-      }
+      SEND_STRING(SS_LCTRL("w") SS_TAP(X_UP));
       break;
 
     case VIM_PANE_DOWN:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTRL("w") SS_TAP(X_DOWN));
-      }
+      SEND_STRING(SS_LCTRL("w") SS_TAP(X_DOWN));
       break;
 
     case COPY:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LGUI("c"));
-      }
+      SEND_STRING(SS_LGUI("c"));
       break;
 
     case PASTE:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LGUI("v"));
-      }
-      break;
-
-    case CHANGE_WINDOW:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LGUI(SS_TAP(X_GRAVE)));
-      }
-      break;
-
-    case NEXT_APP:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LGUI(SS_TAP(X_TAB)));
-      }
-      break;
-
-    case PREV_APP:
-      if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LSHIFT) SS_TAP(X_TAB) SS_UP(X_LGUI) SS_UP(X_LSHIFT));
-      }
+      SEND_STRING(SS_LGUI("v"));
       break;
 
     case VIM_RELOAD:
-      if (record->event.pressed) {
-        SEND_STRING(":e" SS_TAP(X_ENTER));
-      }
+      SEND_STRING(":e" SS_TAP(X_ENTER));
       break;
 
     case VIM_DELETE_LINE:
-      if (record->event.pressed) {
-        SEND_STRING("dd" SS_TAP(X_ENTER));
-      }
+      SEND_STRING("dd" SS_TAP(X_ENTER));
       break;
 
     case VIM_NO_HIGHLIGHTS:
-      if (record->event.pressed) {
-        SEND_STRING(":noh" SS_TAP(X_ENTER));
-      }
+      SEND_STRING(":noh" SS_TAP(X_ENTER));
       break;
 
     case TOGGLE_INSPECTOR:
-      if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LGUI) SS_DOWN(X_LALT) SS_TAP(X_I) SS_UP(X_LALT) SS_UP(X_LGUI));
-      }
+      SEND_STRING(SS_DOWN(X_LGUI X_LALT) SS_TAP(X_I) SS_UP(X_LALT X_LGUI));
       break;
-        
   }
   return true;
 };
