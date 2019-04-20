@@ -57,7 +57,7 @@ This layer is the default layer. It uses a mostly standard QWERTY layout, with a
 
 This layer is toggled when one of the `BASEALT` keys on the BASE layer is held down. This layer gives access to some of the less used keys that are physically absent from 60% boards, along with access to some shortcuts that are uncomfortable to press.
 
-- top row: regular escape, F1-12, and a command+escape shortcut
+- top row: regular escape, F1-12, and a command+backspace shortcut (send to trash)
 - LG+_: these keys all give access to `command + __somekey__` combos. I find them naturally more comfortable, and they all map to the physical key that would be in the same place so they are easy to recall.
 - arrow keys: at the location of `i` `k` `j` and `l` are access to `up` `down` `left` and `right` arrow keys
 - at the bracket keys (`[` and `]`) the shortcuts may not look instantly familiar, these are `previous tab` and `next tab` in most applications.
