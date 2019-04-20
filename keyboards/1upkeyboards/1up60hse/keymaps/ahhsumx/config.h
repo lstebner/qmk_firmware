@@ -17,5 +17,33 @@
 
 #pragma once
 
-// place overrides here
+enum custom_keycodes {
+  COPY,
+  GUP, 
+  NEW_TAB,
+  NEW_WINDOW,
+  NEXT_TAB,
+  PASTE,
+  PREV_TAB,
+  VIM_DELETE_LINE,
+  VIM_NEXT_TAB,
+  VIM_PANE_DOWN,
+  VIM_PANE_LEFT,
+  VIM_PANE_RIGHT,
+  VIM_PANE_UP,
+  VIM_PREV_TAB,
+  VIM_QUIT,
+  VIM_QUITALL,
+  VIM_RELOAD,
+  VIM_WRITE,
+  VIM_NO_HIGHLIGHTS,
+  TOGGLE_INSPECTOR,
+};
+
+enum {
+  LAYER_BASE,
+  LAYER_BASE_ALT,
+  LAYER_MACRO,
+};
+
 
