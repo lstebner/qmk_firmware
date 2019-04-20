@@ -81,7 +81,7 @@ This layer is toggled when one of the `BASEALT` keys on the BASE layer is held d
 
 3. LAYER MACRO
 
-This last layer is meant to make life easier. Some things get a little bit too repetitive, and it's nice to simplify them. This layer is used as a "one shot layer". This means it is activated by a key, and then once any key on this layer is pressed, the action executes and you return the layer you came from. You must press the one shot key again to perform any subsequent macros from this layer. To exit without performing any macros, you can use `ESCAPE`.
+This last layer is meant to make life easier. Some things get a little bit too repetitive, and it's nice to simplify them. This layer is used as a "one shot layer". This means it is activated by a key, and then once any key on this layer is pressed, the action executes and you return to the layer you came from. Meaning, you must press the one shot key again to perform any subsequent macros from this layer. To exit without performing any macros, you can use `ESCAPE`.
 
 - all vim commands execute immediately (aka they tap `ENTER`)
 - `:q`: vim quit
