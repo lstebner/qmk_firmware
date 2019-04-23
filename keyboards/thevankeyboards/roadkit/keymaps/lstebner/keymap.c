@@ -1,4 +1,5 @@
 #include QMK_KEYBOARD_H
+#include "numpad.h"
 
 extern keymap_config_t keymap_config;
 
@@ -19,11 +20,8 @@ enum custom_keycodes {
   CHANGE_WINDOW,
 };
 
-enum layers {
-  LAYER_NUMPAD,
-};
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
   // NUMPAD
   // 
   // -------------------------
@@ -35,11 +33,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // -------------------------
   // |  .  |  0  |LEFT |RIGHT|
   // -------------------------
-  [LAYER_NUMPAD] = LAYOUT_ortho_4x4(
-    KC_7,     KC_8,     KC_9,     KC_KP_PLUS, \
-    KC_4,     KC_5,     KC_6,     KC_KP_MINUS, \
-    KC_1,     KC_2,     KC_3,     KC_BSPACE, \
-    KC_KP_DOT,KC_0,     KC_LEFT,  KC_RIGHT 
+  [LAYER_NUMPAD] = LAYOUT_ortho_4x4_wrapper(
+    NUMPAD_ROW_3, \
+    NUMPAD_ROW_2, \
+    NUMPAD_ROW_1, \
+    NUMPAD_ROW_0
+  ),
+
+  // SYMBOLS
+  // 
+  // -------------------------
+  // |  &  |  *  |  (  |  *  |
+  // -------------------------
+  // |  $  |  %  |  ^  |  /  |
+  // -------------------------
+  // |  !  |  @  |  #  |WIND |
+  // -------------------------
+  // | ___ |  ~  |PRTAB|NETAB|
+  // -------------------------
+  [LAYER_SYMBOLS] = LAYOUT_ortho_4x4(
+    KC_AMPERSAND,     KC_ASTERISK,      KC_LPRN,     KC_KP_ASTERISK, \
+    KC_DOLLAR,        KC_PERCENT,       KC_CIRC,     KC_KP_SLASH, \
+    KC_EXCLAIM,       KC_AT,            KC_HASH,     CHANGE_WINDOW, \
+    LT(LAYER_SYMBOLS, KC_KP_DOT),KC_RPRN,PREV_TAB,NEXT_TAB
   ),
 };
 
