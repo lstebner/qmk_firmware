@@ -6,8 +6,6 @@
 
 
 // remappings with nicer names
-#define ___     KC_TRNS
-#define xxx     XXXXXXX
 #define CMD     KC_LGUI
 #define ALT     KC_LALT
 #define CTRL    KC_LCTL
