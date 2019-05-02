@@ -1,6 +1,9 @@
+#pragma once
+
 enum vim_keycodes {
-  VIM_DELETE_LINE,
+  VIM_DELETE_LINE = SAFE_RANGE,
   VIM_NEXT_TAB,
+  VIM_NO_HIGHLIGHTS,
   VIM_PANE_DOWN,
   VIM_PANE_LEFT,
   VIM_PANE_RIGHT,
@@ -10,7 +13,6 @@ enum vim_keycodes {
   VIM_QUITALL,
   VIM_RELOAD,
   VIM_WRITE,
-  VIM_NO_HIGHLIGHTS,
 };
 
 bool do_vim_key(uint16_t keycode, keyrecord_t *record) {
