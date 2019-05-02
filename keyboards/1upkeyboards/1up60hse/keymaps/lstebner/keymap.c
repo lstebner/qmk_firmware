@@ -23,6 +23,7 @@ enum {
   LAYER_BASE,
   LAYER_BASE_ALT,
   LAYER_MACRO,
+  MAKE_CMD,
 };
 
 
@@ -52,22 +53,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // LAYER BASE ALT
   //
   // -----------------------------------------------------------------------------------------------------
-  // | ESC   |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  | F10  | F11  | F12  |LG+BSPC |
+  // | ESC   |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  | F10  | F11  | F12  |LG+BSPC|
   // -----------------------------------------------------------------------------------------------------
-  // | ______ | LG+Q | LG+W | LG+E | LG+R | LG+T | xxxx | xxxx |  UP  | xxxx | xxxx | LG+{ | LG+} | ____ |
+  // | ______ | QUIT |CMD+W | xxxx |RELOAD|NEWTAB| xxxx | UPDIR|  UP  | xxxx | xxxx |CMD+{ |CMD+} | ____ |
   // -----------------------------------------------------------------------------------------------------
-  // | ______   | LG+A | LG+S | LG+D | LG+F | LG+G | ____ | LEFT | DOWN | RIGHT| ____ |  `~  |    ______ |
+  // | ______   |CMD+A | SAVE |CMD+D | FIND |CMD+G | ____ | LEFT | DOWN | RIGHT| ____ |  `~  |    ______ |
   // -----------------------------------------------------------------------------------------------------
-  // | ______     | LG+Z | LG+X | LG+C | LG+V | LG+B | xxxx | xxxx | xxxx | :gT  | :gt  |         ______ |
+  // | ______     | UNDO | CUT  | COPY |PASTE | xxxx | xxxx | xxxx | xxxx | :gT  | :gt  |         ______ |
   // -----------------------------------------------------------------------------------------------------
   // | ______ | xxxxxx | _______ |                  _                | xxxxxx | xxxxxx | xxxxxx | xxxxxx |
   // -----------------------------------------------------------------------------------------------------
-  [LAYER_BASE_ALT] = LAYOUT_60_ansi(
-      KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, LGUI(KC_BSPC),
-      KC_TRNS, LGUI(KC_Q), LGUI(KC_W), LGUI(KC_E), LGUI(KC_R), LGUI(KC_T), XXXXXXX, XXXXXXX, KC_UP, XXXXXXX, XXXXXXX, LGUI(S(KC_LBRC)), LGUI(S(KC_RBRC)), XXXXXXX,
-      KC_TRNS, LGUI(KC_A), LGUI(KC_S), LGUI(KC_D), LGUI(KC_F), LGUI(KC_G), XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, KC_GRAVE, KC_TRNS,
-      KC_TRNS, LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C),  LGUI(KC_V), LGUI(KC_B),  XXXXXXX, XXXXXXX, XXXXXXX, VIM_PREV_TAB, VIM_NEXT_TAB, KC_TRNS, 
-      KC_TRNS, XXXXXXX, KC_TRNS,                   KC_UNDERSCORE,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+  [LAYER_BASE_ALT] = LAYOUT_60_ansi_wrapper(
+      KC_ESC,  KG_FKEYS, LGUI(KC_BSPC),
+      KC_TRNS, QUIT, CLOSE_WINDOW, xxx, RELOAD, NEW_TAB, xxx, UP_DIR, KC_UP, xxx, xxx, PREV_TAB, NEXT_TAB, xxx,
+      KC_TRNS, SELECT_ALL, SAVE, DROP, FIND, FIND_NEXT, xxx, KC_LEFT, KC_DOWN, KC_RIGHT, xxx, KC_GRAVE, KC_TRNS,
+      KC_TRNS, UNDO, CUT, COPY,  PASTE, xxx,  xxx, xxx, xxx, VIM_PREV_TAB, VIM_NEXT_TAB, KC_TRNS, 
+      KC_TRNS, xxx, KC_TRNS,                   KC_UNDERSCORE,                   xxx, xxx, xxx, xxx
       ),
 
   // LAYER MACRO
@@ -75,26 +76,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // -----------------------------------------------------------------------------------------------------
   // | ESC  | xxxx | xxxx | xxxx | xxxx | xxxx | xxxx | xxxx | xxxx | xxxx | xxxx | xxxx | xxxx | xxxxxx |
   // -----------------------------------------------------------------------------------------------------
-  // | xxxxxx |  :q  |  :w  |  :e  | xxxx | LG+T | xxxx | xxxx | xxxx | INSP | xxxx | xxxx | xxxx | xxxx |
+  // | MAKE   |  :q  |  :w  |  :e  | xxxx | LG+T | xxxx | xxxx | xxxx | INSP | xxxx | xxxx | xxxx | xxxx |
   // -----------------------------------------------------------------------------------------------------
   // | xxxxxx   | xxxx | xxxx |  dd  | xxxx | xxxx | :noh | xxxx | xxxx | xxxx | xxxx | xxxx |    xxxxxx |
   // -----------------------------------------------------------------------------------------------------
-  // | xxxxxx     | xxxx | xxxx | COPY | PASTE| xxxx | LG+N | xxxx | xxxx | xxxx | xxxx |         xxxxxx |
+  // | xxxxxx     | xxxx | xxxx | COPY | PASTE| xxxx | LG+N | xxxx | xxxx | xxxx | xxxx |          RESET |
   // -----------------------------------------------------------------------------------------------------
   // | ______ | xxxxxx | _______ |                ______             | ______ | xxxxxx | ______ | ______ |
   // -----------------------------------------------------------------------------------------------------
-  [LAYER_MACRO] = LAYOUT_60_ansi(
-      KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-      XXXXXXX, VIM_QUIT, VIM_WRITE, VIM_RELOAD, XXXXXXX, NEW_TAB, XXXXXXX, XXXXXXX, TOGGLE_INSPECTOR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-      XXXXXXX, XXXXXXX, XXXXXXX, VIM_DELETE_LINE, XXXXXXX, XXXXXXX, VIM_NO_HIGHLIGHTS,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-      XXXXXXX, XXXXXXX, XXXXXXX, COPY, PASTE, XXXXXXX, NEW_WINDOW, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-      KC_TRNS, XXXXXXX, KC_TRNS,                   KC_TRNS,                   KC_TRNS, XXXXXXX, KC_TRNS, KC_TRNS
+  [LAYER_MACRO] = LAYOUT_60_ansi_wrapper(
+      KC_ESC, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx,
+      MAKE_CMD, VIM_QUIT, VIM_WRITE, VIM_RELOAD, xxx, NEW_TAB, xxx, xxx, TOGGLE_INSPECTOR, xxx, xxx, xxx, xxx, xxx,
+      xxx, xxx, xxx, VIM_DELETE_LINE, xxx, xxx, VIM_NO_HIGHLIGHTS,  xxx, xxx, xxx, xxx, xxx, xxx,
+      xxx, xxx, xxx, COPY, PASTE, xxx, NEW_WINDOW, xxx, xxx, xxx, xxx, RESET,
+      KC_TRNS, xxx, KC_TRNS,                   KC_TRNS,                   KC_TRNS, xxx, KC_TRNS, KC_TRNS
       ),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   do_vim_key(keycode, record);
   do_macro_key(keycode, record);
+
+  if (keycode == MAKE_CMD) {
+    if (record->event.pressed) {
+      SEND_STRING("make 1upkeyboards/1up60hse:lstebner");
+    }
+  }
 
   return true;
 };
