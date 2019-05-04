@@ -27,6 +27,7 @@
 #define UNDO            LGUI(KC_Z)
 #define ___             KC_TRNS
 #define xxx             XXXXXXX
+#define TAP_ENTER       SS_TAP(KC_ENTER)
 
 
 // convenient rows, or "groups"
