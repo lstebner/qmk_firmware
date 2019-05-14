@@ -1,21 +1,18 @@
 #pragma once
 
+#include "keys.h"
+
 enum macro_keys {
   GUP = SAFE_RANGE, 
-  NEXT_TAB,
-  PREV_TAB,
   TOGGLE_INSPECTOR,
   UP_DIR,
-  SUPER,
-  HYPER,
   MAGNET_FULLSCREEN,
   MAGNET_CENTER,
   MAGNET_RESTORE,
 };
 
-#define HOLD_CMD        SS_DOWN(KC_LGUI)
-#define HOLD_ALT        SS_DOWN(KC_LALT)
-#define HOLD_CTRL       SS_DOWN(KC_LCTL)
+#define NEXT_TAB  LGUI(KC_RCBR)
+#define PREV_TAB  LGUI(KC_LCBR)
 
 bool do_macro_key(uint16_t keycode, keyrecord_t *record) {
   if (!record->event.pressed) {
@@ -23,14 +20,6 @@ bool do_macro_key(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
-    case NEXT_TAB:
-      SEND_STRING(SS_DOWN(X_LGUI X_LSHIFT) SS_TAP(X_RBRACKET) SS_UP(X_LGUI X_LSHIFT));
-      break;
-
-    case PREV_TAB:
-      SEND_STRING(SS_DOWN(X_LGUI X_LSHIFT) SS_TAP(X_LBRACKET) SS_UP(X_LGUI X_LSHIFT));
-      break;
-
     case TOGGLE_INSPECTOR:
       SEND_STRING(SS_DOWN(X_LGUI X_LALT) SS_TAP(X_I) SS_UP(X_LALT X_LGUI));
       break;
@@ -39,28 +28,17 @@ bool do_macro_key(uint16_t keycode, keyrecord_t *record) {
       SEND_STRING("../");
       break;
 
-    case SUPER:
-      SEND_STRING(SS_DOWN(X_LGUI X_LALT X_LCTL));
-      break;
-    
-    case HYPER:
-      SEND_STRING(SS_DOWN(X_LGUI X_LALT X_LCTL));
-      break;
-
     case MAGNET_FULLSCREEN:
-      SEND_STRING(SS_DOWN(X_LGUI X_ALT) TAP_ENTER);
+      //SEND_STRING(HOLD_CMD_ALT TAP_ENTER);
       break;
 
     case MAGNET_CENTER:
-      SEND_STRING(HOLD_CMD HOLD_ALT SS_TAP(X_C));
+      //SEND_STRING(HOLD_CMD_ALT SS_TAP(X_C));
       break;
 
     case MAGNET_RESTORE:
-      SEND_STRING(HOLD_CMD HOLD_ALT SS_TAP(X_BACKSPACE));
+      //SEND_STRING(HOLD_CMD_ALT TAP_DELETE);
       break;
-
-    default:
-      return false;
   }
 
   return true;

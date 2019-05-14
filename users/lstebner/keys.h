@@ -27,7 +27,12 @@
 #define UNDO            LGUI(KC_Z)
 #define ___             KC_TRNS
 #define xxx             XXXXXXX
+#define HOLD_CMD        SS_DOWN(KC_LGUI)
+#define HOLD_ALT        SS_DOWN(KC_LALT)
+#define HOLD_CMD_ALT    SS_DOWN(KC_LALT KC_LGUI)
+#define HOLD_CTRL       SS_DOWN(KC_LCTL)
 #define TAP_ENTER       SS_TAP(KC_ENTER)
+#define TAP_DELETE      SS_TAP(KC_BACKSPACE)
 
 
 // convenient rows, or "groups"
@@ -73,5 +78,6 @@
 #define KEYMAP_WRAPPER(...)           LAYOUT(__VA_ARGS__)
 #define LAYOUT_60_ansi_wrapper(...)   LAYOUT_60_ansi(__VA_ARGS__)
 #define LAYOUT_niu_wrapper(...)       LAYOUT_ortho_4x12(__VA_ARGS__)
+
 
 
