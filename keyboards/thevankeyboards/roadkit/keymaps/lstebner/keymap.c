@@ -52,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_KP_4, KC_KP_5, KC_KP_6, KC_KP_PLUS,
       KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_MINUS,
       KC_KP_DOT, KC_KP_0, _EMOJI, KC_ENTER
-  ),
+      ),
 
   // EMOJIS 
   // 
@@ -66,123 +66,123 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // |     |     |     |     |
   // -------------------------
   [LAYER_EMOJI] = LAYOUT_ortho_4x4(
-    EMOJI_SMILE, EMOJI_JOY,   EMOJI_TEAR,   EMOJI_TACO,
-    EMOJI_RAISED_HANDS, EMOJI_INFO_DESK,   EMOJI_ROLLERCOASTER,   EMOJI_DANGO,
-    EMOJI_THUMBS_DOWN, EMOJI_PEACE,   EMOJI_FIRE,   EMOJI_COOLGHOST,
-    EMOJI_THUMBS_UP, EMOJI_CRY_HAPPY, EMOJI_PLUSONE, EMOJI_SALUTE
-  ),
+      EMOJI_SMILE, EMOJI_JOY,   EMOJI_TEAR,   EMOJI_TACO,
+      EMOJI_RAISED_HANDS, EMOJI_INFO_DESK,   EMOJI_ROLLERCOASTER,   EMOJI_DANGO,
+      EMOJI_THUMBS_DOWN, EMOJI_PEACE,   EMOJI_FIRE,   EMOJI_COOLGHOST,
+      EMOJI_THUMBS_UP, EMOJI_CRY_HAPPY, EMOJI_PLUSONE, EMOJI_SALUTE
+      ),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case MAKE_CMD:
-            if (record->event.pressed) {
-              SEND_STRING("make thevankeyboards/roadkit:lstebner");
-            }
-            break;
+  switch (keycode) {
+    case MAKE_CMD:
+      if (record->event.pressed) {
+        SEND_STRING("make thevankeyboards/roadkit:lstebner");
+      }
+      break;
 
-        case EMOJI_JOY:
-            if (record->event.pressed) {
-              SEND_STRING(":joy:");
-            }
-            break;
+    case EMOJI_JOY:
+      if (record->event.pressed) {
+        SEND_STRING(":joy:");
+      }
+      break;
 
-        case EMOJI_SMILE:
-            if (record->event.pressed) {
-              SEND_STRING(":smile:");
-            }
-            break;
+    case EMOJI_SMILE:
+      if (record->event.pressed) {
+        SEND_STRING(":smile:");
+      }
+      break;
 
-        case EMOJI_TEAR:
-            if (record->event.pressed) {
-              SEND_STRING(":cry:");
-            }
-            break;
+    case EMOJI_TEAR:
+      if (record->event.pressed) {
+        SEND_STRING(":cry:");
+      }
+      break;
 
-        case EMOJI_RAISED_HANDS:
-            if (record->event.pressed) {
-              SEND_STRING(":raised_hands:");
-            }
-            break;
+    case EMOJI_RAISED_HANDS:
+      if (record->event.pressed) {
+        SEND_STRING(":raised_hands:");
+      }
+      break;
 
-        case EMOJI_SPARKLE_THUMB:
-            if (record->event.pressed) {
-              SEND_STRING(":sparklethumb:");
-            }
-            break;
+    case EMOJI_SPARKLE_THUMB:
+      if (record->event.pressed) {
+        SEND_STRING(":sparklethumb:");
+      }
+      break;
 
-        case EMOJI_PEACE:
-            if (record->event.pressed) {
-              SEND_STRING(":peace:");
-            }
-            break;
+    case EMOJI_PEACE:
+      if (record->event.pressed) {
+        SEND_STRING(":peace:");
+      }
+      break;
 
-        case EMOJI_FIRE:
-            if (record->event.pressed) {
-              SEND_STRING(":fire:");
-            }
-            break;
+    case EMOJI_FIRE:
+      if (record->event.pressed) {
+        SEND_STRING(":fire:");
+      }
+      break;
 
-        case EMOJI_INFO_DESK:
-            if (record->event.pressed) {
-              SEND_STRING(":information_desk_person:");
-            }
-            break;
+    case EMOJI_INFO_DESK:
+      if (record->event.pressed) {
+        SEND_STRING(":information_desk_person:");
+      }
+      break;
 
-        case EMOJI_THUMBS_UP:
-            if (record->event.pressed) {
-              SEND_STRING(":+1:");
-            }
-            break;
+    case EMOJI_THUMBS_UP:
+      if (record->event.pressed) {
+        SEND_STRING(":+1:");
+      }
+      break;
 
-        case EMOJI_THUMBS_DOWN:
-            if (record->event.pressed) {
-              SEND_STRING(":-1:");
-            }
-            break;
+    case EMOJI_THUMBS_DOWN:
+      if (record->event.pressed) {
+        SEND_STRING(":-1:");
+      }
+      break;
 
-        case EMOJI_CRY_HAPPY:
-            if (record->event.pressed) {
-              SEND_STRING(":cry_happy:");
-            }
-            break;
+    case EMOJI_CRY_HAPPY:
+      if (record->event.pressed) {
+        SEND_STRING(":cry_happy:");
+      }
+      break;
 
-        case EMOJI_DANGO:
-            if (record->event.pressed) {
-              SEND_STRING(":dango:");
-            }
-            break;
+    case EMOJI_DANGO:
+      if (record->event.pressed) {
+        SEND_STRING(":dango:");
+      }
+      break;
 
-        case EMOJI_TACO:
-            if (record->event.pressed) {
-              SEND_STRING(":taco:");
-            }
-            break;
+    case EMOJI_TACO:
+      if (record->event.pressed) {
+        SEND_STRING(":taco:");
+      }
+      break;
 
-        case EMOJI_COOLGHOST:
-            if (record->event.pressed) {
-              SEND_STRING(":coolghost:");
-            }
-            break;
+    case EMOJI_COOLGHOST:
+      if (record->event.pressed) {
+        SEND_STRING(":coolghost:");
+      }
+      break;
 
-        case EMOJI_PLUSONE:
-            if (record->event.pressed) {
-              SEND_STRING(":1:");
-            }
-            break;
+    case EMOJI_PLUSONE:
+      if (record->event.pressed) {
+        SEND_STRING(":1:");
+      }
+      break;
 
-        case EMOJI_ROLLERCOASTER:
-            if (record->event.pressed) {
-              SEND_STRING(":rollercoaster:");
-            }
-            break;
+    case EMOJI_ROLLERCOASTER:
+      if (record->event.pressed) {
+        SEND_STRING(":roller_coaster:");
+      }
+      break;
 
-        case EMOJI_SALUTE:
-            if (record->event.pressed) {
-              SEND_STRING(":salute-canada:");
-            }
-            break;
-    }
+    case EMOJI_SALUTE:
+      if (record->event.pressed) {
+        SEND_STRING(":salute-canada:");
+      }
+      break;
+  }
   return true;
 };
 
