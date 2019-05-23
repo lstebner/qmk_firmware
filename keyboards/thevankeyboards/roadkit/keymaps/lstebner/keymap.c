@@ -52,19 +52,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_KP_DOT, KC_KP_0, _EMOJI, KC_ENTER
   ),
 
-  // SYMBOLS
+  // EMOJIS 
   // 
   // -------------------------
-  // |  &  |  *  |  (  |  *  |
+  // |     |     |     |     |
   // -------------------------
-  // |  $  |  %  |  ^  |  /  |
+  // |     |     |     |     |
   // -------------------------
-  // |  !  |  @  |  #  |WIND |
+  // |     |     |     |     |
   // -------------------------
-  // | ___ |  ~  |PRTAB|NETAB|
+  // |     |     |     |     |
   // -------------------------
   [LAYER_EMOJI] = LAYOUT_ortho_4x4(
-    EMOJI_SMILE, EMOJI_JOY,   EMOJI_TEAR,   KC_KP_PLUS,
+    EMOJI_SMILE, EMOJI_JOY,   EMOJI_TEAR,   EMOJI_TACO,
     EMOJI_RAISED_HANDS, EMOJI_INFO_DESK,   EMOJI_SPARKLE_THUMB,   EMOJI_DANGO,
     EMOJI_THUMBS_DOWN, EMOJI_PEACE,   EMOJI_FIRE,   EMOJI_COOLGHOST,
     EMOJI_THUMBS_UP, EMOJI_CRY_HAPPY, _NUMPAD, KC_ENTER
