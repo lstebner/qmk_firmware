@@ -24,13 +24,15 @@ enum custom_keycodes {
   EMOJI_TACO,
   EMOJI_COOLGHOST,
   EMOJI_PLUSONE,
+  EMOJI_ROLLERCOASTER,
+  EMOJI_SALUTE,
 };
 
 #define LAYER_NUMPAD  0
 #define LAYER_EMOJI   1
 
-#define _NUMPAD MO(LAYER_NUMPAD)
-#define _EMOJI MO(LAYER_EMOJI)
+#define _NUMPAD TO(LAYER_NUMPAD)
+#define _EMOJI  OSL(LAYER_EMOJI)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -65,9 +67,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // -------------------------
   [LAYER_EMOJI] = LAYOUT_ortho_4x4(
     EMOJI_SMILE, EMOJI_JOY,   EMOJI_TEAR,   EMOJI_TACO,
-    EMOJI_RAISED_HANDS, EMOJI_INFO_DESK,   EMOJI_SPARKLE_THUMB,   EMOJI_DANGO,
+    EMOJI_RAISED_HANDS, EMOJI_INFO_DESK,   EMOJI_ROLLERCOASTER,   EMOJI_DANGO,
     EMOJI_THUMBS_DOWN, EMOJI_PEACE,   EMOJI_FIRE,   EMOJI_COOLGHOST,
-    EMOJI_THUMBS_UP, EMOJI_CRY_HAPPY, _NUMPAD, KC_ENTER
+    EMOJI_THUMBS_UP, EMOJI_CRY_HAPPY, EMOJI_PLUSONE, EMOJI_SALUTE
   ),
 };
 
@@ -166,6 +168,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case EMOJI_PLUSONE:
             if (record->event.pressed) {
               SEND_STRING(":1:");
+            }
+            break;
+
+        case EMOJI_ROLLERCOASTER:
+            if (record->event.pressed) {
+              SEND_STRING(":rollercoaster:");
+            }
+            break;
+
+        case EMOJI_SALUTE:
+            if (record->event.pressed) {
+              SEND_STRING(":salute-canada:");
             }
             break;
     }
