@@ -22,10 +22,12 @@ bool do_macro_key(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case TOGGLE_INSPECTOR:
       SEND_STRING(SS_DOWN(X_LGUI X_LALT) SS_TAP(X_I) SS_UP(X_LALT X_LGUI));
+      return false;
       break;
 
     case UP_DIR:
       SEND_STRING("../");
+      return false;
       break;
 
     case MAGNET_FULLSCREEN:

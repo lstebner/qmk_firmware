@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE_ALT] = LAYOUT_60_ansi_wrapper(
       KC_ESC,  KG_FKEYS, LGUI(KC_BSPC),
       KC_TRNS, QUIT, CLOSE_WINDOW, xxx, RELOAD, NEW_TAB, xxx, UP_DIR, KC_UP, xxx, xxx, PREV_TAB, NEXT_TAB, xxx,
-      KC_TRNS, SELECT_ALL, SAVE, DROP, FIND, FIND_NEXT, xxx, KC_LEFT, KC_DOWN, KC_RIGHT, xxx, KC_GRAVE, KC_TRNS,
+      xxx, SELECT_ALL, SAVE, DROP, FIND, FIND_NEXT, xxx, KC_LEFT, KC_DOWN, KC_RIGHT, xxx, KC_GRAVE, KC_TRNS,
       KC_TRNS, UNDO, CUT, COPY,  PASTE, xxx,  xxx, xxx, xxx, VIM_PREV_TAB, VIM_NEXT_TAB, KC_TRNS, 
       KC_TRNS, xxx, KC_TRNS,                   KC_UNDERSCORE,                   xxx, xxx, xxx, xxx
       ),
@@ -85,21 +85,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // | ______ | xxxxxx | _______ |                ______             | ______ | xxxxxx | ______ | ______ |
   // -----------------------------------------------------------------------------------------------------
   [LAYER_MACRO] = LAYOUT_60_ansi_wrapper(
-      KC_ESC, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx,
+      KC_ESC, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, xxx, RESET,
       MAKE_CMD, VIM_QUIT, VIM_WRITE, VIM_RELOAD, xxx, NEW_TAB, xxx, xxx, TOGGLE_INSPECTOR, xxx, xxx, xxx, xxx, xxx,
       xxx, xxx, xxx, VIM_DELETE_LINE, xxx, xxx, VIM_NO_HIGHLIGHTS,  xxx, xxx, xxx, xxx, xxx, xxx,
-      xxx, xxx, xxx, COPY, PASTE, xxx, NEW_WINDOW, xxx, xxx, xxx, xxx, RESET,
+      xxx, xxx, xxx, COPY, PASTE, xxx, NEW_WINDOW, xxx, xxx, xxx, xxx, xxx,
       KC_TRNS, xxx, KC_TRNS,                   KC_TRNS,                   KC_TRNS, xxx, KC_TRNS, KC_TRNS
       ),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  do_vim_key(keycode, record);
-  do_macro_key(keycode, record);
+  if (!do_vim_key(keycode, record)) {
+    return false;
+  }
+
+  if (!do_macro_key(keycode, record)) {
+    return false;
+  }
 
   if (keycode == MAKE_CMD) {
     if (record->event.pressed) {
       SEND_STRING("make 1upkeyboards/1up60hse:lstebner");
+      return false;
     }
   }
 
