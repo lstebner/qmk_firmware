@@ -77,6 +77,7 @@
 #define LAYOUT_WRAPPER(...)           LAYOUT(__VA_ARGS__)
 #define KEYMAP_WRAPPER(...)           LAYOUT(__VA_ARGS__)
 #define LAYOUT_60_ansi_wrapper(...)   LAYOUT_60_ansi(__VA_ARGS__)
+#define LAYOUT_61_ansi_wrapper(...)   LAYOUT_61_ansi(__VA_ARGS__)
 #define LAYOUT_niu_wrapper(...)       LAYOUT_ortho_4x12(__VA_ARGS__)
 
 
